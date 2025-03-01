@@ -1,7 +1,7 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
-name: Publish pnpm to GitHub Packages
+name: Release Build
 
 on:
   release:
@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: $NODE_VERSION
-          cache: 'pnpm'
+          cache: "pnpm"
       - name: Installing Dependencies
         run: pnpm install
       - name: Running Test Suite
@@ -48,7 +48,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: $NODE_VERSION
-          cache: 'pnpm'
+          cache: "pnpm"
           registry-url: https://npm.pkg.github.com/
       - run: pnpm install
       - run: pnpm publish
