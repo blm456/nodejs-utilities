@@ -1,14 +1,25 @@
 {
   "name": "@blm456/utilities",
-  "version": "0.1",
+  "version": "1.0.0",
   "description": "A group of exports that provide basic utility and has no function on its own",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "keywords": [
+    "node.js",
+    "utilities"
+  ],
+  "homepage": "https://github.com/blm456/node-utilities",
+  "bugs": {
+    "url": "https://github.com/blm456/node-utilities/issues"
   },
-  "keywords": [],
-  "author": "blm456",
-  "license": "ISC",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "author": {
+    "name": "Brandon Martin",
+    "email": "brandon@developedincode.com",
+    "url": "https://www.developedincode.com"
+  },
   "packageManager": "pnpm@10.4.1",
   "repository": {
     "type": "git",

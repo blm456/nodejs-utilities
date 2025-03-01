@@ -5,7 +5,8 @@ name: Release Build
 
 on:
   release:
-    types: [created]
+    types: [published]
+    tags: ["release-*"]
 
 env:
   NODE_VERSION: 20
