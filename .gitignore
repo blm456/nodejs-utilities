@@ -1,8 +1,13 @@
+# node.js installed packages
 node_modules/
+
+# environment variable files
 .env*
+
+# build data
 /.dist/
 /.watch/
 *.tsbuildinfo
 
-# Documentation being finalized before upload
+# dev documentation being finalized before upload
 /.dev/
