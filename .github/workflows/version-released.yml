@@ -7,13 +7,6 @@ on:
   release:
     types:
       - published
-  workflow_call:
-    inputs:
-      perform_deploy:
-        type: boolean
-        required: false
-        default: true
-        description: "Should this tag be deployed after testing"
 
 jobs:
   run-test:
