@@ -1,0 +1,69 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Release Build
+
+on:
+  release:
+    types: [published]
+    tags: ["snapshot-*"]
+
+env:
+  NODE_VERSION: 20
+  PNPM_VERSION: 10
+
+jobs:
+  run-test:
+    name: Testing Release Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitHub Repository
+        uses: actions/checkout@v4
+      - name: Install pnpm $PNPM_VERSION
+        uses: pnpm/action-setup@v4
+        with:
+          version: $PNPM_VERSION
+      - name: Use Node.JS $NODE_VERSION
+        uses: actions/setup-node@v4
+        with:
+          node-version: $NODE_VERSION
+          cache: "pnpm"
+      - name: Installing Dependencies
+        run: pnpm install
+      - name: Cleaning Build Directory
+        run: pnpm run clean
+      - name: Building Test Suite
+        run: pnpm run build:test
+      - name: Running Test Suite
+        run: pnpm test
+
+  publish-gpr:
+    name: Building and Publishing to GitHub Packages
+    needs: run-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout GitHub Repository
+        uses: actions/checkout@v4
+      - name: Install pnpm $PNPM_VERSION
+        uses: pnpm/action-setup@v4
+        with:
+          version: $PNPM_VERSION
+      - name: Use Node.JS $NODE_VERSION
+        uses: actions/setup-node@v4
+        with:
+          node-version: $NODE_VERSION
+          cache: "pnpm"
+          registry-url: https://npm.pkg.github.com/
+      - name: Installing Dependencies
+        run: pnpm install
+      - name: Cleaning Build Directory
+        run: pnpm run clean
+      - name: Building project release
+        run: pnpm run build
+      - name: Publishing to packages
+        run: pnpm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
