@@ -1,6 +1,6 @@
 {
   "name": "@blm456/utilities",
-  "version": "1.0.0",
+  "version": "0.0.0-base",
   "description": "A group of exports that provide basic utility and has no function on its own",
   "keywords": [
     "node.js",
@@ -13,7 +13,15 @@
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "build": "tspc --build",
+    "build:clean": "run-s clean build",
+    "build:watch": "run-s clean:watch watch",
+    "test": "node dist/test.js",
+    "test:watch": "nodemon /watch/index.js",
+    "clean": "run-s clean:dist clean:watch",
+    "clean:dist": "rimraf dist",
+    "clean:watch": "rimraf watch",
+    "watch": "tspc --watch --outDir ./watch"
   },
   "author": {
     "name": "Brandon Martin",
@@ -24,5 +32,16 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/blm456/-blm456-utilities.git"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.8",
+    "nodemon": "^3.1.9",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "ts-patch": "^3.3.0",
+    "typescript": "^5.8.2",
+    "typescript-transform-paths": "^3.5.3"
   }
 }
