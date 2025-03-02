@@ -10,10 +10,9 @@ on:
 
 jobs:
   source-branch:
-    name: Get Release Source Branch
     runs-on: ubuntu-latest
     outputs:
-      branch: ${{ steps.source-branch.branch }}
+      branch: ${{ steps.source-branch.outputs.branch }}
     steps:
       - name: Install GitHub CLI
         run: |
