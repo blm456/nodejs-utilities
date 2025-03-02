@@ -9,5 +9,8 @@ node_modules/
 /.watch/
 *.tsbuildinfo
 
+# Local dev data storage
+/.local/
+
 # dev documentation being finalized before upload
 /.dev/
