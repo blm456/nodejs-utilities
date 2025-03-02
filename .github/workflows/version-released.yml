@@ -41,10 +41,10 @@ jobs:
       - name: Cleaning Build Directory
         run: pnpm run clean
 
-      - name: Building Test Suite
-        run: pnpm run build:test
+      - name: Building Tests
+        run: pnpm run build
 
-      - name: Running Test Suite
+      - name: Running Tests
         run: pnpm test
 
   publish-gpr:
