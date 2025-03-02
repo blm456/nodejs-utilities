@@ -1,12 +1,21 @@
 # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 # For syntax: https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions
 
-name: Building and Deploying Release
+name: Deploy Release
+
+run-name: Deploy Version ${{github.ref_name}} created by ${{github.actor}} | ${{}}
 
 on:
   release:
     types:
       - published
+  workflow_call:
+    inputs:
+      perform_deploy:
+        type: boolean
+        required: false
+        default: true
+        description: "Should this tag be deployed after testing"
 
 jobs:
   run-test:
@@ -44,6 +53,7 @@ jobs:
     name: Building and Publishing to GitHub Packages
     needs: run-test
     runs-on: ubuntu-latest
+    if: ${{inputs.perform_deploy}}
     environment: build_environment
     permissions:
       contents: read
