@@ -24,16 +24,15 @@ jobs:
       - name: Checkout GitHub Repository
         uses: actions/checkout@v4
 
-      - name: Install pnpm ${{env.PNPM_VERSION}}
+      - name: Use pnpm
         uses: pnpm/action-setup@v4
         with:
           version: ${{env.PNPM_VERSION}}
 
-      - name: Use Node.JS ${{env.NODE_VERSION}}
+      - name: Use Node.JS
         uses: actions/setup-node@v4
         with:
           node-version: ${{env.NODE_VERSION}}
-          cache: "pnpm"
 
       - name: Installing Dependencies
         run: pnpm install
@@ -60,16 +59,15 @@ jobs:
       - name: Checkout GitHub Repository
         uses: actions/checkout@v4
 
-      - name: Install pnpm ${{env.PNPM_VERSION}}
+      - name: Use pnpm
         uses: pnpm/action-setup@v4
         with:
           version: ${{env.PNPM_VERSION}}
 
-      - name: Use Node.JS ${{env.NODE_VERSION}}
+      - name: Use Node.JS
         uses: actions/setup-node@v4
         with:
           node-version: ${{env.NODE_VERSION}}
-          cache: "pnpm"
           registry-url: https://npm.pkg.github.com/
 
       - name: Installing Dependencies
@@ -78,7 +76,7 @@ jobs:
       - name: Cleaning Build Directory
         run: pnpm run clean
 
-      - name: Building project release
+      - name: Building project
         run: pnpm run build
 
       - name: Publishing to packages
