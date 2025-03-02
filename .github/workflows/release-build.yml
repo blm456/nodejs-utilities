@@ -13,7 +13,8 @@ env:
   PNPM_VERSION: 10
 
 jobs:
-  build:
+  run-test:
+    name: Testing Release Code
     runs-on: ubuntu-latest
     steps:
       - name: Checkout GitHub Repository
@@ -29,11 +30,16 @@ jobs:
           cache: "pnpm"
       - name: Installing Dependencies
         run: pnpm install
+      - name: Cleaning Build Directory
+        run: pnpm run clean
+      - name: Building Test Suite
+        run: pnpm run build:test
       - name: Running Test Suite
         run: pnpm test
 
   publish-gpr:
-    needs: build
+    name: Building and Publishing to GitHub Packages
+    needs: run-test
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -51,7 +57,13 @@ jobs:
           node-version: $NODE_VERSION
           cache: "pnpm"
           registry-url: https://npm.pkg.github.com/
-      - run: pnpm install
-      - run: pnpm publish
+      - name: Installing Dependencies
+        run: pnpm install
+      - name: Cleaning Build Directory
+        run: pnpm run clean
+      - name: Building project release
+        run: pnpm run build
+      - name: Publishing to packages
+        run: pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
