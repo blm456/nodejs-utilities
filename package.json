@@ -11,17 +11,17 @@
     "url": "https://github.com/blm456/node-utilities/issues"
   },
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": ".dist/index.js",
   "scripts": {
     "build": "tspc --build",
     "build:clean": "run-s clean build",
     "build:watch": "run-s clean:watch watch",
-    "test": "node dist/test.js",
-    "test:watch": "nodemon /watch/index.js",
+    "test": "node .dist/test.js",
+    "test:watch": "nodemon /.watch/index.js",
     "clean": "run-s clean:dist clean:watch",
-    "clean:dist": "rimraf dist",
-    "clean:watch": "rimraf watch",
-    "watch": "tspc --watch --outDir ./watch"
+    "clean:dist": "rimraf .dist",
+    "clean:watch": "rimraf .watch",
+    "watch": "tspc --watch --outDir ./.watch"
   },
   "author": {
     "name": "Brandon Martin",

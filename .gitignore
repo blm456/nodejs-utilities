@@ -1,5 +1,8 @@
 node_modules/
-dist/
-watch/
-*.tsbuildinfo
 .env*
+/.dist/
+/.watch/
+*.tsbuildinfo
+
+# Documentation being finalized before upload
+/.dev/
