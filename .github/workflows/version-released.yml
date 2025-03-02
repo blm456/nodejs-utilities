@@ -9,8 +9,37 @@ on:
       - published
 
 jobs:
+  source-branch:
+    name: Get Release Source Branch
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.source-branch.branch }}
+    steps:
+      - name: Install GitHub CLI
+        run: |
+          sudo apt update
+          sudo apt install -y gh
+
+      - name: Get Source Branch from GitHub API
+        id: get-branch # Set step ID to reference outputs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RELEASE_TAG="${{ github.event.release.tag_name }}"
+          REPO="${{ github.repository }}"
+
+          # Get commit SHA associated with the release tag
+          COMMIT_SHA=$(gh api repos/$REPO/git/ref/tags/$RELEASE_TAG --jq '.object.sha')
+
+          # Find the branch that contains this commit
+          SOURCE_BRANCH=$(gh api repos/$REPO/branches --jq ".[] | select(.commit.sha == \"$COMMIT_SHA\") | .name")
+
+          # Store as an output
+          echo "branch=$SOURCE_BRANCH" >> $GITHUB_OUTPUT
+
   run-test:
     name: Running Tests
+    needs: source-branch
     runs-on: ubuntu-latest
     environment: build_environment
     steps:
@@ -41,7 +70,7 @@ jobs:
 
   publish-gpr:
     name: Building and Publishing to GitHub Packages
-    needs: run-test
+    needs: [source-branch, run-test]
     runs-on: ubuntu-latest
     environment: build_environment
     permissions:
@@ -72,6 +101,6 @@ jobs:
         run: pnpm run build
 
       - name: Publishing to packages
-        run: pnpm publish
+        run: pnpm publish --publish-branch ${{ needs.source-branch.outputs.branch }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
