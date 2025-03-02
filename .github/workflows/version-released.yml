@@ -43,7 +43,6 @@ jobs:
     name: Building and Publishing to GitHub Packages
     needs: run-test
     runs-on: ubuntu-latest
-    if: ${{inputs.perform_deploy}}
     environment: build_environment
     permissions:
       contents: read
