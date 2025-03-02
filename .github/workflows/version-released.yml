@@ -3,8 +3,6 @@
 
 name: Deploy Release
 
-run-name: Deploy Version ${{github.ref_name}} created by ${{github.actor}} | ${{}}
-
 on:
   release:
     types:
