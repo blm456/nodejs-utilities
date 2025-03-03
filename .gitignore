@@ -1,3 +1,16 @@
+# node.js installed packages
 node_modules/
-dist/
+
+# environment variable files
 .env*
+
+# build data
+/.dist/
+/.watch/
+*.tsbuildinfo
+
+# Local dev data storage
+/.local/
+
+# dev documentation being finalized before upload
+/.dev/
