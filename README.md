@@ -7,9 +7,11 @@
   <h1 align="right">@blm456/utilities</h1>
   <p align="right">
     <a href="https://github.com/blm456/blm456-utilities/blob/release/LICENSE">
-      <img alt="GitHub License" src="https://img.shields.io/github/license/blm456/blm456-utilities?style=plastic&logo=Pagekit">
+      <img alt="GitHub License" src="https://img.shields.io/github/license/blm456/nodejs-utilities?style=plastic&logo=Pagekit">
     </a>
-    <img alt="GitHub Release" src="https://img.shields.io/github/v/release/blm456/nodejs-utilities?sort=semver&display_name=tag&style=plastic&logo=github&label=release">
+    <img alt="GitHub Release" src="https://img.shields.io/github/v/release/blm456/nodejs-utilities?sort=date&display_name=tag&style=plastic&label=latest&color=orange">
+    <img alt="GitHub Release" src="https://img.shields.io/github/v/release/blm456/nodejs-utilities?include_prereleases&sort=date&display_name=tag&style=plastic&label=dev%20build&color=blue">
+    <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/blm456/nodejs-utilities/version-released.yml?label=build%20status">
   </p>
   <p align="left">A group of exports that provide basic utility and has no function on its own but is used in other projects frequently.</p>
 </p>
@@ -19,3 +21,9 @@
 ```
 $ npm install @blm456/utilities
 ```
+
+This resource does nothing on it's own, but is used in a a variety of other projects (mainly private projects)
+
+## Features
+
+- [Miscellaneous](docs/MISCELLANEOUS.md)
